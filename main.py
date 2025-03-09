@@ -28,7 +28,7 @@ except Exception as e:
 # Send personalized emails
 for recipient in project["recipients"]:
     personalized_body = project["email-body"].replace("{generic_name}", recipient["name"])
-    full_body = f"{personalized_body}<br><br>{project["signature"]}"
+    full_body = f"{personalized_body}<br><br>{project['signature']}"
 
     msg = MIMEMultipart()
     msg["From"] = SENDER_EMAIL
