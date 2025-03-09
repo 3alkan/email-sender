@@ -1,7 +1,7 @@
 import os
 from lib.set_credentials import set_credentials
 
-set_credentials() # this function sets secret informations. You have to write your own one
+set_credentials() # this function sets secret informations
 
 CREDENTIAL_ERROR=False
 SMTP_SERVER = "smtp.gmail.com"

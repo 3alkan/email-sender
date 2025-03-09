@@ -1,13 +1,14 @@
 import smtplib
 import time
 import os
+from lib.logger import logger
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from lib.constants import *
 from lib.helpers import *
 
 if CREDENTIAL_ERROR:
-    print("Error: Email credentials not set. Use environment variables.")
+    logger.error("Error: Email credentials not set. Use environment variables.")
     exit(1)
 
 PROJECT_FOLDER="project1"
@@ -22,7 +23,7 @@ try:
     server.starttls()
     server.login(SENDER_EMAIL, SENDER_PASSWORD)
 except Exception as e:
-    print(f"SMTP Connection Error: {e}")
+    logger.error(f"SMTP Connection Error: {e}")
     exit(1)
 
 # Send personalized emails
@@ -39,10 +40,10 @@ for recipient in project["recipients"]:
 
     try:
         server.sendmail(SENDER_EMAIL, recipient["email"], msg.as_string())
-        print(f"Email sent to {recipient['email']}")
+        logger.info(f"Email sent to {recipient['email']}")
         time.sleep(2)  # Prevent spam detection
     except Exception as e:
-        print(f"Failed to send email to {recipient['email']}: {e}")
+        logger.error(f"Failed to send email to {recipient['email']}: {e}")
 
 # Close connection
 server.quit()

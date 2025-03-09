@@ -1,5 +1,6 @@
 import os
 import re
+from lib.logger import logger
 import ast
 from lib.parsers import *
 
@@ -15,7 +16,7 @@ def read_file(file,folder=None):
         with open(path, "r", encoding="utf-8") as file:
             return file.read()
     except FileNotFoundError:
-        print(f"Error: {path} not found.")
+        logger.error(f"Error: {path} not found.")
         return ""
 
 def read_project(folder_name):
@@ -30,7 +31,7 @@ def read_project(folder_name):
         project["folder-name"]=folder_name
         return project
     except Exception as e:
-        print(f"Error in read_project: ",e)
+        logger.error(f"Error in read_project: ",e)
         return None
 def parse_project(project:dict):
     # In this function project specific parsers applied to the project
@@ -42,5 +43,5 @@ def parse_project(project:dict):
         else:
             return None
     except Exception as e:
-        print(f"Error in parse_project: ",e)
+        logger.error(f"Error in parse_project: ",e)
         return None

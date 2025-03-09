@@ -1,3 +1,5 @@
+from lib.logger import logger
+
 def parse_recipients(content:str):
     """
     * Structure of this function can be change from project to project
@@ -17,5 +19,5 @@ def parse_recipients(content:str):
             else:
                 recipients.append({"email": parts[0].strip(), "name": "Yetkili"})
     except Exception as e:
-        print(f"Error in parse_recipients: ",e)
+        logger.error(f"Error in parse_recipients: ",e)
     return recipients
